@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("permissions")
-//@Validated
+@Validated
 class PermissionController(
     @Autowired
     private val permissionService: PermissionService,
@@ -23,9 +23,8 @@ class PermissionController(
     @PostMapping
     fun createSnippetPermission(
         @Valid @RequestBody createSnippetPermissionDTO: CreateSnippetPermissionDTO,
-        //@AuthenticationPrincipal jwt: Jwt,
+        @AuthenticationPrincipal jwt: Jwt,
     ) {
-        //val userId = jwt.subject
-        return permissionService.createSnippetPermission(createSnippetPermissionDTO, "1")
+        return permissionService.createSnippetPermission(createSnippetPermissionDTO, jwt.subject)
     }
 }

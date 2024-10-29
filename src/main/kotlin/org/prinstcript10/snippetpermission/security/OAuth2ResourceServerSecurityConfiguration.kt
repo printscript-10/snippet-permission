@@ -23,32 +23,19 @@ class OAuth2ResourceServerSecurityConfiguration(
     val issuer: String,
 ) {
 
-//    @Bean
-//    fun filterChain(http: HttpSecurity): SecurityFilterChain {
-//        http.authorizeHttpRequests {
-//            it
-//                .anyRequest().authenticated()
-//        }
-//            .oauth2ResourceServer { it.jwt(withDefaults()) }
-//            .cors {
-//                it.disable()
-//            }
-//            .csrf {
-//                it.disable()
-//            }
-//        return http.build()
-//    }
-
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http
-            .authorizeHttpRequests { auth ->
-                auth.anyRequest().permitAll()
-            }
+        http.authorizeHttpRequests {
+            it
+                .anyRequest().authenticated()
+        }
             .oauth2ResourceServer { it.jwt(withDefaults()) }
-            .cors { it.disable() }
-            .csrf { it.disable() }
-
+            .cors {
+                it.disable()
+            }
+            .csrf {
+                it.disable()
+            }
         return http.build()
     }
 
