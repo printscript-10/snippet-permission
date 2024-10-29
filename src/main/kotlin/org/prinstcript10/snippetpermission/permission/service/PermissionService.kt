@@ -32,7 +32,7 @@ class PermissionService(
             throw ConflictException("Failed to save permission due to a conflict: " + e.message)
         }
     }
-    fun getSnippetPermission(snippetId: String, userId: String): SnippetOwnership {
+    fun getSnippetPermission(snippetId: String, userId: String): SnippetPermission {
         val permission = permissionRepository.findByUserIdAndSnippetId(
             userId = userId,
             snippetId = snippetId
@@ -40,6 +40,6 @@ class PermissionService(
         if(permission == null){
             throw NotFoundException("No permission found matching that userId and snippetId")
         }
-        return permission.ownership
+        return permission
     }
 }
