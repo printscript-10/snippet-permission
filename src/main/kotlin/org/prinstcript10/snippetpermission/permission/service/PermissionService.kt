@@ -2,7 +2,6 @@ package org.prinstcript10.snippetpermission.permission.service
 
 import org.prinstcript10.snippetpermission.permission.model.dto.CreateSnippetPermissionDTO
 import org.prinstcript10.snippetpermission.permission.model.entity.SnippetPermission
-import org.prinstcript10.snippetpermission.permission.model.enum.SnippetOwnership
 import org.prinstcript10.snippetpermission.permission.repository.SnippetPermissionRepository
 import org.prinstcript10.snippetpermission.shared.exception.ConflictException
 import org.prinstcript10.snippetpermission.shared.exception.NotFoundException
