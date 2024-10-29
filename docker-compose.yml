@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - ${PORT}:${PORT}
+      - 8083:8083
     depends_on:
       - postgres
 

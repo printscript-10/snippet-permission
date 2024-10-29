@@ -22,7 +22,7 @@ class PermissionService(
         val snippetPermission = SnippetPermission(
             snippetId = createSnippetPermissionDTO.snippetId,
             userId = userId,
-            ownership = createSnippetPermissionDTO.ownership
+            ownership = createSnippetPermissionDTO.ownership,
         )
         try {
             permissionRepository.save(snippetPermission)
@@ -34,9 +34,9 @@ class PermissionService(
     fun getSnippetPermission(snippetId: String, userId: String): SnippetPermission {
         val permission = permissionRepository.findByUserIdAndSnippetId(
             userId = userId,
-            snippetId = snippetId
+            snippetId = snippetId,
         )
-        if(permission == null){
+        if (permission == null) {
             throw NotFoundException("No permission found matching that userId and snippetId")
         }
         return permission
