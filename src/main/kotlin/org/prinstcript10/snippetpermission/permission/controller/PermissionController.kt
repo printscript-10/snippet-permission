@@ -1,13 +1,14 @@
 package org.prinstcript10.snippetpermission.permission.controller
 
 import jakarta.validation.Valid
-import org.prinstcript10.snippetpermission.permission.model.dto.CreateSnippetPermissionDTO
+import org.prinstcript10.snippetpermission.permission.model.dto.ShareSnippetDTO
 import org.prinstcript10.snippetpermission.permission.model.entity.SnippetPermission
 import org.prinstcript10.snippetpermission.permission.service.PermissionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -23,12 +24,20 @@ class PermissionController(
     private val permissionService: PermissionService,
 ) {
 
-    @PostMapping
-    fun createSnippetPermission(
-        @Valid @RequestBody createSnippetPermissionDTO: CreateSnippetPermissionDTO,
+    @PostMapping("share")
+    fun shareSnippet(
+        @Valid @RequestBody shareSnippetDTO: ShareSnippetDTO,
         @AuthenticationPrincipal jwt: Jwt,
     ) {
-        return permissionService.createSnippetPermission(createSnippetPermissionDTO, jwt.subject)
+        return permissionService.shareSnippet(shareSnippetDTO, jwt.subject)
+    }
+
+    @PostMapping("{id}")
+    fun createSnippetPermission(
+        @PathVariable("id") snippetId: String,
+        @AuthenticationPrincipal jwt: Jwt,
+    ) {
+        return permissionService.createSnippetPermission(snippetId, jwt.subject)
     }
 
     @GetMapping("/{id}")
@@ -37,5 +46,13 @@ class PermissionController(
         @AuthenticationPrincipal jwt: Jwt,
     ): SnippetPermission {
         return permissionService.getSnippetPermission(snippetId, jwt.subject)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteSnippetPermissions(
+        @PathVariable("id") snippetId: String,
+        @AuthenticationPrincipal jwt: Jwt,
+    ) {
+        return permissionService.deleteSnippetPermissions(snippetId, jwt.subject)
     }
 }
