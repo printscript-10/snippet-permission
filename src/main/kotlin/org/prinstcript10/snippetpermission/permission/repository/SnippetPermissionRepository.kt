@@ -7,4 +7,5 @@ interface SnippetPermissionRepository : JpaRepository<SnippetPermission, Long> {
     fun findByUserIdAndSnippetId(userId: String, snippetId: String): SnippetPermission?
     fun deleteAllBySnippetId(snippetId: String)
     fun findAllBySnippetId(snippetId: String): List<SnippetPermission>
+    fun findByUserId(userId: String): List<SnippetPermission>
 }

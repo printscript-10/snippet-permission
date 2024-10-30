@@ -73,6 +73,10 @@ class PermissionService(
         return permission
     }
 
+    fun getAllSnippetPermissions(userId: String): List<SnippetPermission> {
+        return permissionRepository.findByUserId(userId)
+    }
+
     @Transactional
     fun deleteSnippetPermissions(snippetId: String, userId: String) {
         val permission = permissionRepository.findByUserIdAndSnippetId(

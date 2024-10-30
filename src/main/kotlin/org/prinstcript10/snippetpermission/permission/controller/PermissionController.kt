@@ -48,6 +48,13 @@ class PermissionController(
         return permissionService.getSnippetPermission(snippetId, jwt.subject)
     }
 
+    @GetMapping()
+    fun getAllSnippetPermissions(
+        @AuthenticationPrincipal jwt: Jwt,
+    ): List<SnippetPermission> {
+        return permissionService.getAllSnippetPermissions(jwt.subject)
+    }
+
     @DeleteMapping("/{id}")
     fun deleteSnippetPermissions(
         @PathVariable("id") snippetId: String,
