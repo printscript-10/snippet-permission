@@ -46,7 +46,7 @@ class PermissionService(
         }
 
         if (permission.ownership != SnippetOwnership.OWNER) {
-            throw ConflictException("You do not have permission to delete this snippet")
+            throw ConflictException("You do not have permission to share this snippet")
         }
 
         try {
