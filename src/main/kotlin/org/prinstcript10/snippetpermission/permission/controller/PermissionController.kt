@@ -40,6 +40,14 @@ class PermissionController(
         return permissionService.createSnippetPermission(snippetId, jwt.subject)
     }
 
+    @GetMapping("owner/{id}")
+    fun getSnippetOwner(
+        @PathVariable("id") snippetId: String,
+        @AuthenticationPrincipal jwt: Jwt,
+    ): SnippetPermission {
+        return permissionService.getSnippetOwner(snippetId, jwt.subject)
+    }
+
     @GetMapping("/{id}")
     fun getSnippetPermission(
         @PathVariable("id") snippetId: String,

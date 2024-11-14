@@ -94,4 +94,17 @@ class PermissionService(
 
         permissionRepository.deleteAllBySnippetId(snippetId)
     }
+
+    fun getSnippetOwner(snippetId: String, userId: String): SnippetPermission {
+        val permission = permissionRepository.findByUserIdAndSnippetId(
+            userId = userId,
+            snippetId = snippetId,
+        )
+
+        if (permission == null) {
+            throw NotFoundException("No permission found matching that userId and snippetId")
+        }
+
+        return permissionRepository.findFirstBySnippetIdAndOwnership(snippetId, SnippetOwnership.OWNER)!!
+    }
 }
