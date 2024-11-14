@@ -45,7 +45,7 @@ jobs:
           host: ${{ secrets.DEV_EC2_HOST_DNS }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-          envs: TOKEN
+          envs: USERNAME, TOKEN
           script: |
             cd infra
             sudo docker login --username $USERNAME --password $TOKEN ghcr.io
