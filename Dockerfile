@@ -13,6 +13,6 @@ EXPOSE 8083
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/spring-boot-application.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/snippet-permission.jar
 
 ENTRYPOINT ["java","-javaagent:/usr/local/newrelic/newrelic.jar", "-jar", "-Dspring.profiles.active=production","/app/snippet-permission.jar"]
